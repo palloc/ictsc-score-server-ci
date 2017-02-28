@@ -74,3 +74,12 @@ assert res.status_code == 200
 
 res = requests.get(BASE_URL+'/contest', cookies = cookie)
 assert res.status_code == 200
+
+res = requests.get(BASE_URL+'/scoreboard', cookies = cookie)
+assert res.status_code == 200
+
+
+
+
+
+
