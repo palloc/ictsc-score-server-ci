@@ -3,47 +3,47 @@
 import requests
 import json
 
+BASE_URL = 'http://contest.ictsc/api'
+
 # session
-sess = 'BAh7B0kiD3Nlc3Npb25faWQGOgZFVEkiRWY3MGIxODUzMjI2ZTdmZmJkMjYz%0AZjQzOTg0YzAyYWU3OTcwMjJiMDlhOTIzZTY5YzljNmYwMDllZmRmODI2YzMG%0AOwBGSSIObWVtYmVyX2lkBjsARmkW%0A--1500cac8d9f5e1df7a480ea66117ed0c098ffe2d'
-cookie = {'rack.session': sess}
+login = {"login": "cocoa", "password": "cocoa"}
+res = requests.post(BASE_URL+"/session", params=login)
+cookies = {'rac.session': res.cookies['rack.session']}
 
-
-BASE_URL = ''
-with open('url.txt', 'r') as f:
-    BASE_URL = f.readline()
-
-
-res = requests.get(BASE_URL+'/api/teams')
+res = requests.get(BASE_URL+'/teams')
 assert res.status_code == 200
 assert json.loads(res.text)
 
-
-res = requests.get(BASE_URL+'/api/teams/1')
+res = requests.get(BASE_URL+'/teams/1')
 assert res.status_code == 200
 assert json.loads(res.text)
 
-
-res = requests.get(BASE_URL+'/api/answers', cookies = cookie)
+res = requests.get(BASE_URL+'/answers', cookies = cookie)
 assert res.status_code == 200
 assert json.loads(res.text)
 
-res = requests.get(BASE_URL+'/api/answers/27600/comments', cookies = cookie)
+res = requests.get(BASE_URL+'/answers/27600/comments', cookies = cookie)
+print res.text
 assert res.status_code == 200
 
-res = requests.get(BASE_URL+'/api/answers/27600/comments/276000', cookies = cookie)
-assert res.status_code == 200
-assert json.loads(res.text)
-
-res = requests.get(BASE_URL+'/api/issues', cookies = cookie)
+res = requests.get(BASE_URL+'/answers/27600/comments/276000', cookies = cookie)
+print res.status_code
 assert res.status_code == 200
 assert json.loads(res.text)
 
-res = requests.get(BASE_URL+'/api/issues/11200/cmments', cookies = cookie)
+res = requests.get(BASE_URL+'/issues', cookies = cookie)
+assert res.status_code == 200
+assert json.loads(res.text)
+
+res = requests.get(BASE_URL+'/issues/11200/cmments', cookies = cookie)
+assert res.status_code == 200
+assert json.loads(res.text)
+
+res = requests.get(BASE_URL+'/issues/comments/276000', cookies = cookie)
+assert res.status_code == 200
+assert json.loads(res.text)
+
+res = requests.get(BASE_URL+'/problems', cookies = cookie)
 print res.text
 assert res.status_code == 200
 assert json.loads(res.text)
-
-res = requests.get(BASE_URL+'/api/issues/comments/276000', cookies = cookie)
-assert res.status_code == 200
-assert json.loads(res.text)
-
