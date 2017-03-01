@@ -22,10 +22,11 @@ assert res.status_code == 200
 assert json.loads(res.text)
 
 res = requests.get(BASE_URL+'/answers', cookies = cookie)
-assert res.status_code == 500#200
+assert res.status_code == 200
 res = requests.get(BASE_URL+'/answers/'+EXISITS_ANSWER_ID, cookies = cookie)
 assert res.status_code == 200
-#res = requests.get(BASE_URL+'/answers/'+EXISITS_ANSWER_ID+'/comments/'+EXISITS_ANSWER_COMMENT_ID, cookies = cookie)
+
+res = requests.get(BASE_URL+'/answers/'+EXISITS_ANSWER_ID+'/comments/'+EXISITS_ANSWER_COMMENT_ID, cookies = cookie)
 #assert res.status_code == 200
 
 res = requests.get(BASE_URL+'/issues', cookies = cookie)
@@ -55,9 +56,9 @@ res = requests.get(BASE_URL+'/problem_groups/1', cookies = cookie)
 assert res.status_code == 200
 
 res = requests.get(BASE_URL+'/scores', cookies = cookie)
-assert res.status_code == 500
+assert res.status_code == 200
 #res = requests.get(BASE_URL+'/scores/1', cookies = cookie)
-#assert res.status_code == 500
+#assert res.status_code == 200
 
 res = requests.get(BASE_URL+'/notices', cookies = cookie)
 assert res.status_code == 200
@@ -80,8 +81,4 @@ assert res.status_code == 200
 
 res = requests.get(BASE_URL+'/session', cookies = cookie)
 assert res.status_code == 200
-
-
-
-
 
